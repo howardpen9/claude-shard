@@ -16,6 +16,20 @@
 
 定位區分:`/kimi` `/codex` = 同步第二意見;`/shard` = 非同步背景委派。
 
+## 跟 Claude Code 既有功能有何不同?
+
+Claude Code 本來就有 subagent(Agent tool + `background` + `isolation: worktree`)和 `/tasks`(TaskCreate/TaskList 進度清單)。shard 不是重造它們,而是補上兩段內建沒有的:**使用者主動強迫拆分** + **git 收尾的最後一哩**。
+
+| | `/tasks`(內建) | 直接叫 subagent(內建) | `/shard` |
+|---|---|---|---|
+| 拆分由誰發起 | model 自己記進度用 | 要在 prompt 裡**手動描述**怎麼派,由 model 決定 | **你下指令強迫拆**:`/shard A ; B ; C`,主 session 被禁止自己動手 |
+| 工作單位 | 一行描述(bookkeeping) | 一個 agent、回一段文字 | worktree + branch + manifest 的**可合併工作單元** |
+| 完成之後 | 打勾 | 結果貼回對話,怎麼合併靠人即興 | **自動 land**:rebase → 測試 → 按 policy 合或開 PR,回一行 |
+| 狀態存活 | session 內 | agent 散了就散了 | manifest 落檔,跨 session、跨脈絡壓縮,`/shards` 隨時對帳 |
+| 部署意識 | 無 | 無 | policy registry + push 節流,知道「push = Railway 部署一次」 |
+
+一句話:內建功能是**被動的零件**——每次派工都要在 prompt 裡說服 model、結果回來還要自己想怎麼合;shard 把它變成**主動的動詞**——拆分是指令不是描述,收尾是規則不是即興。主 session 的角色從 worker 變成 **dispatcher + integrator**,這才撐得起「一個對話窗當 2-3 個用」。
+
 ## 設計核心
 
 ### 1. Manifest 是真相來源
