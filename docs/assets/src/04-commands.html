@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1280px; height: 480px;
+    background: #0c0a09;
+    font-family: "SF Pro Display", "Inter", system-ui, sans-serif;
+    color: #fafaf9;
+    padding: 48px 56px;
+  }
+  h2 {
+    font-size: 24px; font-weight: 800; margin-bottom: 28px;
+  }
+  h2 span { color: #f59e0b; }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .row {
+    display: grid; grid-template-columns: 280px 1fr; gap: 16px;
+    align-items: center;
+    background: rgba(28,25,23,0.8);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 18px 22px;
+  }
+  .cmd {
+    font-family: "SF Mono", ui-monospace, monospace;
+    font-size: 16px; font-weight: 700;
+    color: #fde68a;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.25);
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+  .desc { font-size: 16px; color: rgba(250,250,249,0.7); line-height: 1.4; }
+</style>
+</head>
+<body>
+  <h2>Commands · <span>cheat sheet</span></h2>
+  <div class="grid">
+    <div class="row">
+      <div class="cmd">/shard &lt;task&gt;</div>
+      <div class="desc">Oneshot: fire → work → auto-land → gone</div>
+    </div>
+    <div class="row">
+      <div class="cmd">/shard --keep &lt;task&gt;</div>
+      <div class="desc">Iterate: report, append, land when ready</div>
+    </div>
+    <div class="row">
+      <div class="cmd">/shard A ; B ; C</div>
+      <div class="desc">Parallel — one worker per demand</div>
+    </div>
+    <div class="row">
+      <div class="cmd">/shards · /shards --gc</div>
+      <div class="desc">Status board · zombie / orphan reconcile</div>
+    </div>
+  </div>
+</body>
+</html>

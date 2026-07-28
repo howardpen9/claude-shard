@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1280px; height: 640px;
+    background: #0c0a09;
+    font-family: "SF Pro Display", "Inter", system-ui, sans-serif;
+    color: #fafaf9;
+    overflow: hidden;
+    position: relative;
+  }
+  .glow {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 55% 50% at 70% 40%, rgba(245,158,11,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(52,211,153,0.08) 0%, transparent 50%);
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black, transparent);
+  }
+  .content {
+    position: relative; z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 72px;
+    gap: 20px;
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: "SF Mono", ui-monospace, monospace;
+    font-size: 15px; letter-spacing: 0.12em;
+    color: #fbbf24; font-weight: 600;
+  }
+  .badge::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: #f59e0b; box-shadow: 0 0 12px #f59e0b;
+  }
+  h1 {
+    font-size: 72px; font-weight: 800; letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  h1 span { color: #f59e0b; }
+  .tagline {
+    font-size: 28px; font-weight: 500; color: rgba(250,250,249,0.72);
+    max-width: 720px; line-height: 1.35;
+  }
+  .cmd {
+    margin-top: 12px;
+    display: inline-flex; align-items: center;
+    font-family: "SF Mono", ui-monospace, monospace;
+    font-size: 20px;
+    background: rgba(28,25,23,0.9);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 14px 22px;
+    color: #fde68a;
+    box-shadow: 0 0 40px rgba(245,158,11,0.15);
+    width: fit-content;
+  }
+  .cmd .p { color: #fbbf24; margin-right: 10px; }
+  .shards {
+    position: absolute; right: 64px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 14px; z-index: 2;
+  }
+  .card {
+    width: 280px;
+    background: rgba(28,25,23,0.92);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-family: "SF Mono", ui-monospace, monospace;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+  }
+  .card.done { border-color: rgba(52,211,153,0.45); }
+  .card .top { display: flex; justify-content: space-between; font-size: 12px; color: rgba(250,250,249,0.5); margin-bottom: 6px; }
+  .card .top .ok { color: #34d399; font-weight: 700; }
+  .card .top .run { color: #fbbf24; }
+  .card .task { font-size: 18px; font-weight: 700; color: #fafaf9; margin-bottom: 10px; font-family: "SF Pro Display", system-ui, sans-serif; }
+  .bar { height: 6px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; }
+  .bar i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #f59e0b, #fcd34d); }
+  .card.done .bar i { background: #34d399; width: 100% !important; }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="grid"></div>
+  <div class="content">
+    <div class="badge">OPEN SOURCE · CLAUDE CODE</div>
+    <h1>claude<span>-</span>shard</h1>
+    <p class="tagline">Parallel workers in isolated git worktrees.<br/>Fire tasks. Auto-land. Deploy-safe.</p>
+    <div class="cmd"><span class="p">$</span>/shard fix-auth ; fix-ui ; fix-tests</div>
+  </div>
+  <div class="shards">
+    <div class="card done">
+      <div class="top"><span>worktree-agent-a</span><span class="ok">LANDED ✓</span></div>
+      <div class="task">fix-auth</div>
+      <div class="bar"><i style="width:100%"></i></div>
+    </div>
+    <div class="card">
+      <div class="top"><span>worktree-agent-b</span><span class="run">running…</span></div>
+      <div class="task">fix-ui</div>
+      <div class="bar"><i style="width:68%"></i></div>
+    </div>
+    <div class="card">
+      <div class="top"><span>worktree-agent-c</span><span class="run">running…</span></div>
+      <div class="task">fix-tests</div>
+      <div class="bar"><i style="width:42%"></i></div>
+    </div>
+  </div>
+</body>
+</html>

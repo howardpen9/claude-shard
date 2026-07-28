@@ -1,8 +1,16 @@
 # claude-shard
 
+<p align="center">
+  <img src="docs/assets/hero.png" alt="claude-shard — parallel workers in isolated git worktrees" width="100%" />
+</p>
+
 **Parallel Claude Code workers in isolated git worktrees — fire, land, done.**
 
 Replace “open 2–3 Claude Code windows on the same project.” Multiple sessions stomp the same workspace and each push can trigger a deploy storm. Shard moves parallelism into **git worktrees**; the main session only dispatches and integrates.
+
+<p align="center">
+  <img src="docs/assets/before-after.png" alt="Before: 3 Claude windows conflict — After: /shard parallel worktrees" width="100%" />
+</p>
 
 ## Commands
 
@@ -13,6 +21,10 @@ Replace “open 2–3 Claude Code windows on the same project.” Multiple sessi
 | `/shard A ; B ; C` | Parallel tasks — one worker per demand |
 | `/shards` | Status board: in-flight / stuck / open for follow-up (reality-check: worktree/branch alive?, age, zombie flags) |
 | `/shards --gc` | Three-way reconcile: zombie manifests / orphan worktrees / leftover `worktree-agent-*` branches (read-only report) |
+
+<p align="center">
+  <img src="docs/assets/commands.png" alt="Command cheat sheet" width="100%" />
+</p>
 
 **Not the same as second-opinion peers:** `/kimi` and `/codex` are **sync** review. `/shard` is **async** background delegation.
 
@@ -29,6 +41,12 @@ Claude Code already has subagents (`Agent` + `background` + `isolation: worktree
 | Deploy awareness | None | None | Policy registry + push throttle (“push = one Railway deploy”) |
 
 Built-ins are **passive parts** — every dispatch needs prompt persuasion and every return needs improvised merge. Shard makes them **active verbs**: split is a command, land is a ruleset. The main session becomes **dispatcher + integrator**, so one window can act like two or three.
+
+## How it works
+
+<p align="center">
+  <img src="docs/assets/flow.png" alt="fire → work → land → deploy-safe" width="100%" />
+</p>
 
 ## Design core
 
@@ -59,6 +77,7 @@ skills/shards/SKILL.md           # /shards board + interpretation rules
 skills/shards/scripts/board.py   # reality-check + --gc reconcile (read-only)
 agents/worker.md                 # background worker (isolation: worktree + background: true)
 install.sh                       # symlink into ~/.claude
+docs/assets/                     # README concept art (hero / before-after / flow / commands)
 ```
 
 Runtime state (**not in the repo**, lives under `~/.claude/shards/`): manifests, `policy.json`, `locks/`, GC log.
