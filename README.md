@@ -9,6 +9,8 @@
 > **Primary audience:** you run **Claude Code** as your main coding agent (one window is the driver).  
 > This is **not** a Grok plugin, not an MCP, not a peer-review slash. It is a **Claude Code** skill + agent that sits on top of stock `Agent` + `isolation: worktree` + background.
 
+繁體中文：[README.zh-TW.md](./README.zh-TW.md)
+
 ---
 
 ## When it is worth installing
